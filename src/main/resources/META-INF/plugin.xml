@@ -1,0 +1,26 @@
+<idea-plugin>
+    <id>org.example.test-plugin</id>
+    <name>Plugin display name here</name>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="GenerateCodeAction" class="com.cnqisoft.fastcode.GenerateCodeAction" text="生成代码"
+                description="生成代码">
+            <add-to-group group-id="CodeMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

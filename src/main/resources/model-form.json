@@ -1,0 +1,87 @@
+{
+  "name": "model",
+  "fields": [
+    {
+      "field": "modelName",
+      "type": "String",
+      "rules": {
+        "required": true
+      }
+    },
+    {
+      "field": "fileType",
+      "type": "String",
+      "rules": {
+        "enum": [
+          "单模型",
+          "集成模型"
+        ]
+      }
+    },
+    {
+      "field": "profession",
+      "type": "String",
+      "rules": {
+        "enum": [
+          "土建",
+          "机电",
+          "电气",
+          "给排水"
+        ]
+      }
+    },
+    {
+      "field": "uploadStatus",
+      "type": "String",
+      "rules": {
+        "enum": [
+          "上传成功",
+          "上传中",
+          "上传失败"
+        ]
+      }
+    },
+    {
+      "field": "translateStatus",
+      "type": "String",
+      "rules": {
+        "enum": [
+          "等待转换",
+          "转换成功",
+          "转换中",
+          "转换失败"
+        ]
+      }
+    },
+    {
+      "field": "sync",
+      "type": "Number",
+      "rules": {
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "field": "modelFile",
+      "type": "File",
+      "rules": {
+        "required": true
+      }
+    },
+    {
+      "field": "fileId",
+      "type": "Long",
+      "rules": {
+        "required": true,
+        "unique": true
+      }
+    },
+    {
+      "field": "integrate",
+      "type": "String"
+    }
+  ]
+}
