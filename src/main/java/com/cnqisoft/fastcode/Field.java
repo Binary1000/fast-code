@@ -6,7 +6,13 @@ public class Field {
 
     private final String name;
 
-    private final DataType dataType;
+    private final String capitalizedName;
+
+    private final String underlineCaseName;
+
+    private final String dbType;
+
+    private final String javaType;
 
     private final Integer length;
 
@@ -28,7 +34,10 @@ public class Field {
 
     public Field(String name, DataType dataType, int length, Boolean required, Boolean unique) {
         this.name = name;
-        this.dataType = dataType;
+        this.underlineCaseName = StrUtil.toUnderlineCase(name);
+        this.capitalizedName = StrUtil.upperFirst(name);
+        this.dbType = dataType.getDbType();
+        this.javaType = dataType.getJavaType();
         this.length = length;
         this.required = required;
         this.unique = unique;
@@ -43,10 +52,26 @@ public class Field {
     }
 
     public String getString() {
-        return String.format("  `%s` %s(%d) %s %s, \n", StrUtil.toUnderlineCase(name), dataType.getDbType(), length, isUnique() ? "unique" : "", isRequired() ? "NOT NULL" : "NULL");
+        return String.format("  `%s` %s(%d) %s %s, \n", underlineCaseName, dbType, length, isUnique() ? "unique" : "", isRequired() ? "NOT NULL" : "NULL");
+    }
+
+    public String getDbType() {
+        return dbType;
     }
 
     public String getJavaType() {
-        return String.format("private %s %s;", dataType.getJavaType(), name);
+        return javaType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUnderlineCaseName() {
+        return underlineCaseName;
+    }
+
+    public String getCapitalizedName() {
+        return capitalizedName;
     }
 }

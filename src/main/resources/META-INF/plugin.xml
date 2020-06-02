@@ -1,11 +1,11 @@
 <idea-plugin>
     <id>org.example.test-plugin</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <name>Fast Code</name>
+    <vendor email="929371489@qq.com" url="http://www.cnqisoft.com">cnqisoft</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    根据配置文件快速生成Java代码和数据库.<br>
+    <em>Java SpringMVC MyBatis</em>
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${packageRoot}.mapper.${Entity}Mapper">
+
+    <resultMap type="${packageRoot}.entity.${Entity}" id="${Entity}Map">
+#foreach(${column} in ${columns})
+        <result property="${column.name}" column="${column.underlineCaseName}"/>
+#end
+    </resultMap>
+
+    <select id="queryById" parameterType="int" resultMap="${Entity}Map">
+        SELECT * FROM ${entity} WHERE id = #id
+    </select>
+
+    <select id="queryAll" resultMap="${Entity}Map">
+        SELECT * FROM ${entity}
+    </select>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM ${entity} WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        update ${entity}
+        <set>
+#foreach(${column} in ${columns})
+            <if test="${column.name} != null">
+                ${column.underlineCaseName} = #{${column.name}},
+            </if>
+#end
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <insert id="insert" parameterType="${packageRoot}.entity.${Entity}" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO ${entity} (
+#foreach(${column} in ${columns})
+            ${column.underlineCaseName}#if($velocityHasNext),
+#end
+#end
+
+        )
+        VALUES (
+#foreach(${column} in ${columns})
+            #{${column.name}}#if($velocityHasNext),
+#end
+#end
+
+        )
+    </insert>
+
+</mapper>

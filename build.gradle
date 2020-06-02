@@ -1,15 +1,27 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url 'https://dl.bintray.com/jetbrains/intellij-plugin-service'
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.5.0-SNAPSHOT"
+    }
+}
+
 plugins {
-    id 'java'
     id 'org.jetbrains.intellij' version '0.4.21'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
-
+group 'com.cnqisoft'
+version '1.0'
 
 repositories {
-    maven { url 'https://maven.aliyun.com/repository/google/' }
-    maven { url 'https://maven.aliyun.com/repository/jcenter/'}
+    jcenter()
     mavenCentral()
 }
 
@@ -25,11 +37,12 @@ tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
 }
 
-
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2019.3.1'
+    version '2020.1'
+    type 'IU'
 }
+
 patchPluginXml {
     changeNotes """
       Add change notes here.<br>

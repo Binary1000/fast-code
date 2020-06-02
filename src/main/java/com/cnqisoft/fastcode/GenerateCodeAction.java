@@ -10,7 +10,7 @@ public class GenerateCodeAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        PathDialog dialog = new PathDialog(e.getProject());
+        GenerateCodeDialog dialog = new GenerateCodeDialog(e.getProject());
         dialog.open();
     }
 }

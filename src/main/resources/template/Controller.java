@@ -33,7 +33,7 @@ public class ${Entity}Controller {
         return ${entity}Service.delete(id);
     }
 
-    @PutMapping("/file")
+    @PutMapping("/${entity}")
     ${Entity} update(${Entity} ${entity}) {
         return ${entity}Service.update(${entity});
     }
