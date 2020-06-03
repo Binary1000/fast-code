@@ -17,6 +17,10 @@ public class Table {
 
     private List<Field> fields;
 
+    public List<Field> getFields() {
+        return fields;
+    }
+
     public Table(String name, List<Field> fields) {
         this(name, fields, DEFAULT_CHARSET, DEFAULT_ENGINE);
     }
@@ -26,6 +30,10 @@ public class Table {
         this.fields = fields;
         this.charset = charset;
         this.engine = engine;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {

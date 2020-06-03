@@ -11,7 +11,7 @@
     </resultMap>
 
     <select id="queryById" parameterType="int" resultMap="${Entity}Map">
-        SELECT * FROM ${entity} WHERE id = #id
+        SELECT * FROM ${entity} WHERE id = #{id}
     </select>
 
     <select id="queryAll" resultMap="${Entity}Map">

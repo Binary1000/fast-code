@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnqisoft.mapper.ModelMapper">
+
+    <resultMap type="com.cnqisoft.entity.Model" id="ModelMap">
+        <result property="modelName" column="model_name"/>
+        <result property="fileType" column="file_type"/>
+        <result property="translateStatus" column="translate_status"/>
+        <result property="sync" column="sync"/>
+        <result property="modelFile" column="model_file"/>
+        <result property="fileId" column="file_id"/>
+        <result property="integrate" column="integrate"/>
+    </resultMap>
+
+    <select id="queryById" parameterType="int" resultMap="ModelMap">
+        SELECT * FROM model WHERE id = #{id}
+    </select>
+
+    <select id="queryAll" resultMap="ModelMap">
+        SELECT * FROM model
+    </select>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM model WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        update model
+        <set>
+            <if test="modelName != null">
+                model_name = #{modelName},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType},
+            </if>
+            <if test="translateStatus != null">
+                translate_status = #{translateStatus},
+            </if>
+            <if test="sync != null">
+                sync = #{sync},
+            </if>
+            <if test="modelFile != null">
+                model_file = #{modelFile},
+            </if>
+            <if test="fileId != null">
+                file_id = #{fileId},
+            </if>
+            <if test="integrate != null">
+                integrate = #{integrate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <insert id="insert" parameterType="com.cnqisoft.entity.Model" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO model (
+            model_name,
+            file_type,
+            translate_status,
+            sync,
+            model_file,
+            file_id,
+            integrate
+        )
+        VALUES (
+            #{modelName},
+            #{fileType},
+            #{translateStatus},
+            #{sync},
+            #{modelFile},
+            #{fileId},
+            #{integrate}
+        )
+    </insert>
+
+</mapper>

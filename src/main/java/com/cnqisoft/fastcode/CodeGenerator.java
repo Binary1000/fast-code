@@ -27,11 +27,11 @@ public class CodeGenerator {
     public void generateCode(String configFilePath, String outputPath, String packageName) {
         try {
 
-            JSONObject jsonObject = parseConfigFile(configFilePath);
-            String entityName = jsonObject.getString("name").toLowerCase();
-            String capitalizeEntityName = StrUtil.upperFirst(entityName);
+            Table table = ConfigFileParser.parse(configFilePath);
 
-            List<Field> fieldList = getFieldList(jsonObject);
+            String entityName = table.getName().toLowerCase();
+            String capitalizeEntityName = StrUtil.upperFirst(entityName);
+            List<Field> fieldList = table.getFields();
 
             VelocityContext velocityContext = new VelocityContext();
             velocityContext.put("packageRoot", packageName);
@@ -39,9 +39,6 @@ public class CodeGenerator {
             velocityContext.put("entity", entityName);
             velocityContext.put("columns", fieldList);
 
-            Table table = new Table(entityName, fieldList);
-            String tableDDL = table.getTableDDL();
-            System.out.println(tableDDL);
 
             output(outputPath, capitalizeEntityName, velocityContext, Level.CONTROLLER);
             output(outputPath, capitalizeEntityName, velocityContext, Level.MAPPER_JAVA);
@@ -51,6 +48,17 @@ public class CodeGenerator {
 
             output(resourcePath, capitalizeEntityName, velocityContext, Level.MAPPER_XML);
 
+
+            for (Field field : fieldList) {
+                if (field.isEnum()) {
+                    velocityContext.put("EnumClassName", field.getCapitalizedName());
+                    velocityContext.put("enumClassName", field.getName());
+                    velocityContext.put("enums", field.getEnumList());
+                    velocityContext.put("valueType", field.getJavaType());
+
+                    output(outputPath, field.getCapitalizedName(), velocityContext, Level.ENUM);
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,36 +72,11 @@ public class CodeGenerator {
         InputStream inputStream = ResourceUtil.getResourceAsStream("template/" + level.templateName);
         String template = StreamUtil.readString(inputStream, "UTF-8");
         String code = VelocityUtil.render(template, velocityContext);
-        FileUtil.writeBytes(code.getBytes(), path);
+        FileUtil.writeUtf8String(code, path);
     }
 
     private String getOutputPath(String packagePath, String entityName, Level level) {
         return packagePath + File.separator + level.packageName + File.separator + entityName + level.fileName;
     }
 
-    private List<Field> getFieldList(JSONObject jsonObject) {
-        JSONArray fieldJsonArray = jsonObject.getJSONArray("fields");
-        List<Field> fieldList = new ArrayList<>(fieldJsonArray.size());
-
-        for (int i = 0; i < fieldJsonArray.size(); i++) {
-            JSONObject fieldJSONObject = fieldJsonArray.getJSONObject(i);
-            String fieldName = fieldJSONObject.getString("field");
-            String type = fieldJSONObject.getString("type");
-            JSONObject rules = fieldJSONObject.getJSONObject("rules");
-
-            if (rules != null) {
-                Boolean required = rules.getBoolean("required");
-                Boolean unique = rules.getBoolean("unique");
-                DataType dataType = DataType.valueOf(type.toUpperCase());
-                Field field = new Field(fieldName, dataType, required, unique);
-                fieldList.add(field);
-            }
-        }
-        return fieldList;
-    }
-
-    private JSONObject parseConfigFile(String path) {
-        String s = FileUtil.readUtf8String(path);
-        return JSON.parseObject(s);
-    }
 }

@@ -26,7 +26,8 @@ public class ${Entity}ServiceImpl implements ${Entity}Service {
 
     @Override
     public ${Entity} insert(${Entity} ${entity}) {
-        return ${entity}Mapper.insert(${entity});
+        ${entity}Mapper.insert(${entity});
+        return ${entity};
     }
 
     @Override
@@ -36,6 +37,7 @@ public class ${Entity}ServiceImpl implements ${Entity}Service {
 
     @Override
     public ${Entity} update(${Entity} ${entity}) {
-        return ${entity}Mapper.update(${entity});
+        ${entity}Mapper.update(${entity});
+        return ${entity};
     }
 }

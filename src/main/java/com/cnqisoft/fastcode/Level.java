@@ -33,7 +33,9 @@ public enum Level {
     /**
      * MapperXml
      */
-    MAPPER_XML("mapper", "Mapper.xml", "Mapper.xml");
+    MAPPER_XML("mapper", "Mapper.xml", "Mapper.xml"),
+
+    ENUM("enums", ".java", "Enum.java");
 
     public final String packageName;
 

@@ -47,15 +47,15 @@
       "type": "Number",
       "enum": [
         {
-          "name": "未同步",
+          "name": "sync",
           "value": 0
         },
         {
-          "name": "已同步",
+          "name": "notSync",
           "value": 1
         },
         {
-          "name": "同步中",
+          "name": "syncing",
           "value": 2
         }
       ]

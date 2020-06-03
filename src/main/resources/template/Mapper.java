@@ -12,10 +12,10 @@ public interface ${Entity}Mapper {
 
     List<${Entity}> queryAll();
 
-    ${Entity} insert(${Entity} ${entity});
+    int insert(${Entity} ${entity});
 
     boolean delete(Integer id);
 
-    ${Entity} update(${Entity} ${entity});
+    int update(${Entity} ${entity});
 
 }

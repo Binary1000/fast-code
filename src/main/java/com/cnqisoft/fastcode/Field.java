@@ -2,6 +2,8 @@ package com.cnqisoft.fastcode;
 
 import cn.hutool.core.util.StrUtil;
 
+import java.util.List;
+
 public class Field {
 
     private final String name;
@@ -19,6 +21,21 @@ public class Field {
     private final Boolean required;
 
     private final Boolean unique;
+
+    private Boolean isEnum = false;
+
+    private List<Enum> enumList;
+
+    public void setEnumList(List<Enum> enumList) {
+        if (!enumList.isEmpty()) {
+            this.isEnum = true;
+        }
+        this.enumList = enumList;
+    }
+
+    public List<Enum> getEnumList() {
+        return enumList;
+    }
 
     public Field(String name, DataType dataType) {
         this(name, dataType, dataType.getLength());
@@ -52,7 +69,8 @@ public class Field {
     }
 
     public String getString() {
-        return String.format("  `%s` %s(%d) %s %s, \n", underlineCaseName, jdbcType, length, isUnique() ? "unique" : "", isRequired() ? "NOT NULL" : "NULL");
+        return String.format("  `%s` %s(%d) %s %s, \n", underlineCaseName
+                , jdbcType, length, isUnique() ? "unique" : "", isRequired() ? "NOT NULL" : "NULL");
     }
 
     public String getJdbcType() {
@@ -73,5 +91,9 @@ public class Field {
 
     public String getCapitalizedName() {
         return capitalizedName;
+    }
+
+    public Boolean isEnum() {
+        return isEnum;
     }
 }
