@@ -5,5 +5,4 @@ public enum Charset {
     UTF8,
     UTF16
 
-
 }

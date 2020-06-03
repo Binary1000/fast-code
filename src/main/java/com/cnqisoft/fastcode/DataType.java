@@ -13,12 +13,12 @@ public enum DataType {
 
     private final int length;
 
-    private final String dbType;
+    private final String jdbcType;
 
     private final String javaType;
 
     DataType(String dbType, String javaType, int length) {
-        this.dbType = dbType;
+        this.jdbcType = dbType;
         this.javaType = javaType;
         this.length = length;
     }
@@ -27,8 +27,8 @@ public enum DataType {
         return length;
     }
 
-    public String getDbType() {
-        return dbType;
+    public String getJdbcType() {
+        return jdbcType;
     }
 
     public String getJavaType() {

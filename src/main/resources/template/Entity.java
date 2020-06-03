@@ -8,20 +8,20 @@ public class ${Entity} {
     private ${column.javaType} ${column.name};
 
 #end
-    private void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    private Long getId() {
+    public Long getId() {
         return id;
     };
 
 #foreach(${column} in ${columns})
-    private void set${column.capitalizedName}(${column.javaType} ${column.name}) {
+    public void set${column.capitalizedName}(${column.javaType} ${column.name}) {
         this.${column.name} = ${column.name};
     }
 
-    private ${column.javaType} get${column.capitalizedName}() {
+    public ${column.javaType} get${column.capitalizedName}() {
         return ${column.name};
     };
 

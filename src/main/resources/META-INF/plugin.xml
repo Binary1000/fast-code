@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>org.example.test-plugin</id>
+    <id>com.cnqisoft.fast-code</id>
     <name>Fast Code</name>
     <vendor email="929371489@qq.com" url="http://www.cnqisoft.com">cnqisoft</vendor>
 

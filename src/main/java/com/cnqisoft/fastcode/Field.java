@@ -10,7 +10,7 @@ public class Field {
 
     private final String underlineCaseName;
 
-    private final String dbType;
+    private final String jdbcType;
 
     private final String javaType;
 
@@ -36,7 +36,7 @@ public class Field {
         this.name = name;
         this.underlineCaseName = StrUtil.toUnderlineCase(name);
         this.capitalizedName = StrUtil.upperFirst(name);
-        this.dbType = dataType.getDbType();
+        this.jdbcType = dataType.getJdbcType();
         this.javaType = dataType.getJavaType();
         this.length = length;
         this.required = required;
@@ -52,11 +52,11 @@ public class Field {
     }
 
     public String getString() {
-        return String.format("  `%s` %s(%d) %s %s, \n", underlineCaseName, dbType, length, isUnique() ? "unique" : "", isRequired() ? "NOT NULL" : "NULL");
+        return String.format("  `%s` %s(%d) %s %s, \n", underlineCaseName, jdbcType, length, isUnique() ? "unique" : "", isRequired() ? "NOT NULL" : "NULL");
     }
 
-    public String getDbType() {
-        return dbType;
+    public String getJdbcType() {
+        return jdbcType;
     }
 
     public String getJavaType() {
