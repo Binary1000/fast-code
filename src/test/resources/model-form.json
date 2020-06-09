@@ -9,6 +9,7 @@
     {
       "field": "fileType",
       "type": "String",
+      "input": false,
       "enum": [
         {
           "name": "singleModel",
@@ -20,9 +21,11 @@
         }
       ]
     },
+
     {
       "field": "translateStatus",
       "type": "String",
+      "input": false,
       "enum": [
         {
           "name": "prepare",
@@ -45,37 +48,34 @@
     {
       "field": "sync",
       "type": "Number",
+      "input": false,
       "enum": [
         {
-          "name": "sync",
+          "name": "notSynchronized",
           "value": 0
         },
         {
-          "name": "notSync",
+          "name": "synchronized",
           "value": 1
         },
         {
-          "name": "syncing",
+          "name": "synchronizing",
           "value": 2
         }
       ]
     },
     {
-      "field": "modelFile",
-      "type": "File",
-      "rules": {
-        "required": true
-      }
+      "field": "modelFilePath",
+      "type": "String"
     },
     {
       "field": "fileId",
       "type": "Long",
       "required": true,
       "unique": true
-    },
-    {
-      "field": "integrate",
-      "type": "String"
     }
+  ],
+  "files": [
+    "modelFile"
   ]
 }

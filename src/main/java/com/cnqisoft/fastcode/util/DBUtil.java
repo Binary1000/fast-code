@@ -1,4 +1,4 @@
-package com.cnqisoft.fastcode;
+package com.cnqisoft.fastcode.util;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.alibaba.druid.pool.DruidPooledResultSet;

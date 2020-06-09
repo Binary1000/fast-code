@@ -1,4 +1,4 @@
-package com.cnqisoft.fastcode;
+package com.cnqisoft.fastcode.util;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;

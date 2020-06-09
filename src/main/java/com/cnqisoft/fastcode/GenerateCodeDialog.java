@@ -1,29 +1,16 @@
 package com.cnqisoft.fastcode;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.cnqisoft.fastcode.util.ModuleUtil;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDialog;
 import com.intellij.openapi.fileChooser.ex.FileChooserDialogImpl;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.apache.velocity.VelocityContext;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.jps.model.java.JavaSourceRootType;
-import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GenerateCodeDialog extends JDialog {
 

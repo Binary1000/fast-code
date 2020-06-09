@@ -1,22 +1,34 @@
 package com.cnqisoft.entity;
 
+import javax.validation.constraints.NotNull;
+import com.cnqisoft.annotation.EnumValue;
+import com.cnqisoft.enums.FileType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.cnqisoft.enums.TranslateStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.cnqisoft.enums.Sync;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Model {
 
     private Long id;
 
+    @NotNull
     private String modelName;
 
+    @EnumValue(FileType.class)
     private String fileType;
 
+    @EnumValue(TranslateStatus.class)
     private String translateStatus;
 
+    @EnumValue(Sync.class)
     private Integer sync;
 
-    private MultipartFile modelFile;
+    private String modelFilePath;
 
+    @NotNull
     private Long fileId;
-
-    private String integrate;
 
     public void setId(Long id) {
         this.id = id;
@@ -58,12 +70,12 @@ public class Model {
         return sync;
     };
 
-    public void setModelFile(MultipartFile modelFile) {
-        this.modelFile = modelFile;
+    public void setModelFilePath(String modelFilePath) {
+        this.modelFilePath = modelFilePath;
     }
 
-    public MultipartFile getModelFile() {
-        return modelFile;
+    public String getModelFilePath() {
+        return modelFilePath;
     };
 
     public void setFileId(Long fileId) {
@@ -72,14 +84,6 @@ public class Model {
 
     public Long getFileId() {
         return fileId;
-    };
-
-    public void setIntegrate(String integrate) {
-        this.integrate = integrate;
-    }
-
-    public String getIntegrate() {
-        return integrate;
     };
 
 

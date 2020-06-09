@@ -1,4 +1,4 @@
-package com.cnqisoft.fastcode;
+package com.cnqisoft.fastcode.util;
 
 import java.io.Closeable;
 import java.sql.Connection;

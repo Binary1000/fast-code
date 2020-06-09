@@ -1,5 +1,7 @@
 package com.cnqisoft.fastcode;
 
+import com.cnqisoft.fastcode.util.DBUtil;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,8 +19,18 @@ public class Table {
 
     private List<Field> fields;
 
+    private List<String> files;
+
     public List<Field> getFields() {
         return fields;
+    }
+
+    public List<String> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<String> files) {
+        this.files = files;
     }
 
     public Table(String name, List<Field> fields) {

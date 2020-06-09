@@ -9,9 +9,8 @@
         <result property="fileType" column="file_type"/>
         <result property="translateStatus" column="translate_status"/>
         <result property="sync" column="sync"/>
-        <result property="modelFile" column="model_file"/>
+        <result property="modelFilePath" column="model_file_path"/>
         <result property="fileId" column="file_id"/>
-        <result property="integrate" column="integrate"/>
     </resultMap>
 
     <select id="queryById" parameterType="int" resultMap="ModelMap">
@@ -41,14 +40,11 @@
             <if test="sync != null">
                 sync = #{sync},
             </if>
-            <if test="modelFile != null">
-                model_file = #{modelFile},
+            <if test="modelFilePath != null">
+                model_file_path = #{modelFilePath},
             </if>
             <if test="fileId != null">
                 file_id = #{fileId},
-            </if>
-            <if test="integrate != null">
-                integrate = #{integrate},
             </if>
         </set>
         where id = #{id}
@@ -61,18 +57,16 @@
             file_type,
             translate_status,
             sync,
-            model_file,
-            file_id,
-            integrate
+            model_file_path,
+            file_id
         )
         VALUES (
             #{modelName},
             #{fileType},
             #{translateStatus},
             #{sync},
-            #{modelFile},
-            #{fileId},
-            #{integrate}
+            #{modelFilePath},
+            #{fileId}
         )
     </insert>
 

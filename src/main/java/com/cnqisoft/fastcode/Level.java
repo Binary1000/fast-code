@@ -35,7 +35,13 @@ public enum Level {
      */
     MAPPER_XML("mapper", "Mapper.xml", "Mapper.xml"),
 
-    ENUM("enums", ".java", "Enum.java");
+    ENUM("enums", ".java", "Enum.java"),
+
+    ANNOTATION("annotation", "EnumValue.java", "EnumValue.java"),
+
+    RESPONSE("advice", "Response.java", "Response.java"),
+
+    ADVICE("advice", "GlobalControllerAdvice.java", "GlobalControllerAdvice.java");
 
     public final String packageName;
 

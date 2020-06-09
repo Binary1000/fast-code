@@ -1,8 +1,5 @@
 package ${packageRoot}.enums;
 
-/**
- * @author Binary on 2020/6/3
- */
 public enum ${EnumClassName} {
 
 #foreach(${enum} in ${enums})
@@ -10,7 +7,7 @@ public enum ${EnumClassName} {
 
 #end
 
-    private ${valueType} value;
+    private final ${valueType} value;
 
     ${EnumClassName}(${valueType} value) {
         this.value = value;
@@ -29,5 +26,16 @@ public enum ${EnumClassName} {
             }
         }
         throw new IllegalArgumentException("No matching constant for [" + value + "]");
+    }
+
+    public static boolean isPresent(${valueType} value) {
+        ${EnumClassName}[] values = values();
+
+        for (${EnumClassName} ${enumClassName} : values) {
+            if (${enumClassName}.value.equals(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

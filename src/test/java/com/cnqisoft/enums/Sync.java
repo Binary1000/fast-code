@@ -1,15 +1,12 @@
 package com.cnqisoft.enums;
 
-/**
- * @author Binary on 2020/6/3
- */
 public enum Sync {
 
-    SYNC(0),
-    NOT_SYNC(1),
-    SYNCING(2);
+    NOT_SYNCHRONIZED(0),
+    SYNCHRONIZED(1),
+    SYNCHRONIZING(2);
 
-    private Integer value;
+    private final Integer value;
 
     Sync(Integer value) {
         this.value = value;
@@ -28,5 +25,16 @@ public enum Sync {
             }
         }
         throw new IllegalArgumentException("No matching constant for [" + value + "]");
+    }
+
+    public static boolean isPresent(Integer value) {
+        Sync[] values = values();
+
+        for (Sync sync : values) {
+            if (sync.value.equals(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

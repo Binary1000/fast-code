@@ -2,15 +2,14 @@ package com.cnqisoft.fastcode;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.cnqisoft.fastcode.util.ResourceUtil;
+import com.cnqisoft.fastcode.util.StreamUtil;
+import com.cnqisoft.fastcode.util.VelocityUtil;
 import org.apache.velocity.VelocityContext;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,25 +31,29 @@ public class CodeGenerator {
             String entityName = table.getName().toLowerCase();
             String capitalizeEntityName = StrUtil.upperFirst(entityName);
             List<Field> fieldList = table.getFields();
+            List<String> files = table.getFiles();
 
             VelocityContext velocityContext = new VelocityContext();
             velocityContext.put("packageRoot", packageName);
             velocityContext.put("Entity", capitalizeEntityName);
             velocityContext.put("entity", entityName);
             velocityContext.put("columns", fieldList);
-
+            velocityContext.put("files", files);
 
             output(outputPath, capitalizeEntityName, velocityContext, Level.CONTROLLER);
             output(outputPath, capitalizeEntityName, velocityContext, Level.MAPPER_JAVA);
             output(outputPath, capitalizeEntityName, velocityContext, Level.SERVICE_IMPL);
             output(outputPath, capitalizeEntityName, velocityContext, Level.SERVICE);
             output(outputPath, capitalizeEntityName, velocityContext, Level.ENTITY);
-
+            output(outputPath, "", velocityContext, Level.ANNOTATION);
+            output(outputPath, "", velocityContext, Level.ADVICE);
+            output(outputPath, "", velocityContext, Level.RESPONSE);
             output(resourcePath, capitalizeEntityName, velocityContext, Level.MAPPER_XML);
 
 
+
             for (Field field : fieldList) {
-                if (field.isEnum()) {
+                if (field.isEnumeration()) {
                     velocityContext.put("EnumClassName", field.getCapitalizedName());
                     velocityContext.put("enumClassName", field.getName());
                     velocityContext.put("enums", field.getEnumList());
@@ -59,6 +62,13 @@ public class CodeGenerator {
                     output(outputPath, field.getCapitalizedName(), velocityContext, Level.ENUM);
                 }
             }
+
+
+            String path = resourcePath + File.separator + "table" + File.separator + entityName + ".sql";
+            File file = new File(path);
+            file.getParentFile().mkdirs();
+            FileUtil.writeUtf8String(table.getTableDDL(), path);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

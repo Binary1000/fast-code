@@ -3,7 +3,10 @@ package com.cnqisoft.controller;
 import com.cnqisoft.entity.Model;
 import com.cnqisoft.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.List;
 
@@ -14,28 +17,28 @@ public class ModelController {
     ModelService modelService;
 
     @GetMapping("/model/{id}")
-    List<Model> queryById(@PathVariable Integer id) {
+    public List<Model> queryById(@PathVariable Integer id) {
         return modelService.queryById(id);
     }
 
     @GetMapping("/model")
-    List<Model> queryAll() {
+    public List<Model> queryAll() {
         return modelService.queryAll();
     }
 
     @PostMapping("/model")
-    Model insert(Model model) {
+    public Model insert(@Validated Model model, MultipartFile modelFile) {
         return modelService.insert(model);
     }
 
-    @DeleteMapping("/model/{id}")
-    boolean delete(@PathVariable Integer id) {
-        return modelService.delete(id);
+    @PutMapping("/model")
+    public Model update(@Validated Model model) {
+        return modelService.update(model);
     }
 
-    @PutMapping("/model")
-    Model update(Model model) {
-        return modelService.update(model);
+    @DeleteMapping("/model/{id}")
+    public boolean delete(@PathVariable Integer id) {
+        return modelService.delete(id);
     }
 
 }

@@ -1,8 +1,5 @@
 package com.cnqisoft.enums;
 
-/**
- * @author Binary on 2020/6/3
- */
 public enum TranslateStatus {
 
     PREPARE("等待转换"),
@@ -10,7 +7,7 @@ public enum TranslateStatus {
     PROCESSING("转换中"),
     FAILED("转换失败");
 
-    private String value;
+    private final String value;
 
     TranslateStatus(String value) {
         this.value = value;
@@ -29,5 +26,16 @@ public enum TranslateStatus {
             }
         }
         throw new IllegalArgumentException("No matching constant for [" + value + "]");
+    }
+
+    public static boolean isPresent(String value) {
+        TranslateStatus[] values = values();
+
+        for (TranslateStatus translateStatus : values) {
+            if (translateStatus.value.equals(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

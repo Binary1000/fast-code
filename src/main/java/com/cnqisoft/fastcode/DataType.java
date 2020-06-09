@@ -6,9 +6,19 @@ package com.cnqisoft.fastcode;
 
 public enum DataType {
 
+    /**
+     * 字符串
+     */
     STRING("varchar", "String", 255),
-    FILE("varchar", "MultipartFile",255),
+
+    /**
+     * 数字
+     */
     NUMBER("int", "Integer", 11),
+
+    /**
+     * 长整数
+     */
     LONG("int", "Long", 11);
 
     private final int length;

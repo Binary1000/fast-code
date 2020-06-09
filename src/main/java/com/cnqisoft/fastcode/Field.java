@@ -22,13 +22,13 @@ public class Field {
 
     private final Boolean unique;
 
-    private Boolean isEnum = false;
+    private Boolean enumeration = false;
 
     private List<Enum> enumList;
 
     public void setEnumList(List<Enum> enumList) {
         if (!enumList.isEmpty()) {
-            this.isEnum = true;
+            this.enumeration = true;
         }
         this.enumList = enumList;
     }
@@ -56,13 +56,10 @@ public class Field {
         this.jdbcType = dataType.getJdbcType();
         this.javaType = dataType.getJavaType();
         this.length = length;
-        this.required = required;
-        this.unique = unique;
+        this.required = required == null ? false : required;
+        this.unique = unique == null ? false : unique;
     }
 
-    public boolean isRequired() {
-        return required != null && required;
-    }
 
     public boolean isUnique() {
         return unique != null && unique;
@@ -93,7 +90,12 @@ public class Field {
         return capitalizedName;
     }
 
-    public Boolean isEnum() {
-        return isEnum;
+    public Boolean isEnumeration() {
+        return enumeration;
     }
+
+    public Boolean isRequired() {
+        return required;
+    }
+
 }

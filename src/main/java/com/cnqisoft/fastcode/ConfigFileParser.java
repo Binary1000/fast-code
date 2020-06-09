@@ -17,8 +17,21 @@ public class ConfigFileParser {
         JSONObject jsonObject = parseConfigFile(configFilePath);
 
         String name = jsonObject.getString("name");
-        List<Field> fieldList = getFieldList(jsonObject);
-        return new Table(name, fieldList);
+        Table table = new Table(name, getFieldList(jsonObject));
+        table.setFiles(getFileList(jsonObject));
+        return table;
+    }
+
+    private static List<String> getFileList(JSONObject jsonObject) {
+        List<String> files = new ArrayList<>();
+        JSONArray fileJsonArray = jsonObject.getJSONArray("files");
+        if (fileJsonArray != null) {
+            for (int i = 0; i < fileJsonArray.size(); i++) {
+                String fileField = fileJsonArray.getString(i);
+                files.add(fileField);
+            }
+        }
+        return files;
     }
 
     private static List<Field> getFieldList(JSONObject jsonObject) {
@@ -26,16 +39,16 @@ public class ConfigFileParser {
         List<Field> fieldList = new ArrayList<>(fieldJsonArray.size());
 
         for (int i = 0; i < fieldJsonArray.size(); i++) {
-            JSONObject fieldJSONObject = fieldJsonArray.getJSONObject(i);
-            String fieldName = fieldJSONObject.getString("field");
-            String type = fieldJSONObject.getString("type");
-            Boolean required = fieldJSONObject.getBoolean("required");
-            Boolean unique = fieldJSONObject.getBoolean("unique");
+            JSONObject fieldJsonObject = fieldJsonArray.getJSONObject(i);
+            String fieldName = fieldJsonObject.getString("field");
+            String type = fieldJsonObject.getString("type");
+            Boolean required = fieldJsonObject.getBoolean("required");
+            Boolean unique = fieldJsonObject.getBoolean("unique");
             DataType dataType = DataType.valueOf(type.toUpperCase());
 
             Field field = new Field(fieldName, dataType, required, unique);
             fieldList.add(field);
-            JSONArray enums = fieldJSONObject.getJSONArray("enum");
+            JSONArray enums = fieldJsonObject.getJSONArray("enum");
             if (enums != null) {
                 List<Enum> enumList = parseEnums(enums, type);
                 field.setEnumList(enumList);
